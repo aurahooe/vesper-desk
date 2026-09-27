@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vesper Desk</title>
+  <meta name="description" content="A quiet public wall. Notes marked public sit in the room. The hour turns itself." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="veil" id="veil"></div>
+  <header class="top">
+    <a class="mark" href="#wall">Vesper Desk</a>
+    <nav>
+      <button type="button" data-go="wall">Wall</button>
+      <button type="button" data-go="desk">Desk</button>
+      <button type="button" data-go="account" id="accountBtn">Sign in</button>
+    </nav>
+  </header>
+  <section class="hourbar">
+    <div>
+      <p class="kicker" id="hourLabel">This hour</p>
+      <h1 id="masthead">Opening hour</h1>
+    </div>
+    <div class="clockwrap">
+      <p class="mono" id="clock">00:00:00</p>
+      <p class="small" id="until">until the next turn</p>
+    </div>
+  </section>
+  <p class="edition-note" id="editionNote">The desk is open.</p>
+  <main>
+    <section id="wall" class="panel active">
+      <div class="section-head">
+        <h2>Public wall</h2>
+        <p>Only notes marked public appear here. Private ones stay on your desk.</p>
+      </div>
+      <div id="wallGrid" class="grid"></div>
+    </section>
+    <section id="desk" class="panel">
+      <div class="section-head">
+        <h2>Your desk</h2>
+        <p>Write something. Keep it private, or put it on the wall.</p>
+      </div>
+      <form id="noteForm" class="sheet hidden">
+        <label>Title<input id="title" maxlength="80" required placeholder="A short line" /></label>
+        <label>Note<textarea id="body" maxlength="4000" required rows="7" placeholder="What you actually mean."></textarea></label>
+        <label class="check"><input type="checkbox" id="isPublic" /> Mark public — show on the wall</label>
+        <button type="submit" class="solid">Save note</button>
+        <p class="form-msg" id="formMsg"></p>
+      </form>
+      <p id="deskGate" class="gate">Sign in to keep a desk.</p>
+      <div id="mine" class="stack"></div>
+    </section>
+    <section id="account" class="panel">
+      <div class="section-head">
+        <h2>Account</h2>
+        <p>Email and password. Your notes persist on the server.</p>
+      </div>
+      <form id="authForm" class="sheet">
+        <label>Email<input id="email" type="email" required autocomplete="email" /></label>
+        <label>Password<input id="password" type="password" required minlength="8" autocomplete="current-password" /></label>
+        <div class="row">
+          <button type="submit" class="solid">Sign in</button>
+          <button type="button" class="ghost" id="signupBtn">Create account</button>
+        </div>
+        <p class="form-msg" id="authMsg"></p>
+      </form>
+      <div id="signed" class="sheet hidden">
+        <p class="mono" id="who"></p>
+        <button type="button" class="ghost" id="signout">Sign out</button>
+      </div>
+    </section>
+  </main>
+  <footer><p>Vesper Desk turns every hour. Public notes stay public until you pull them back.</p></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
